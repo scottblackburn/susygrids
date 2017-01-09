@@ -1,0 +1,53 @@
+$susy:(
+  container: 1200px,
+  columns: 12
+);
+
+.l-grid {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap; // If width of items exceeds the container the items will wrap to the next line.
+	min-height: 8em;
+
+	&__col {
+	  background: $c-red;
+	  padding: 2em;
+	  margin-bottom: gutter();
+
+		&--1 {
+		  width: span(3);
+		}
+
+		&--2 {
+		  width: span(5);
+		}
+
+		&--3 {
+		  width: span(4);
+		}
+
+		&--4 {
+		  width: span(5);
+		}
+
+		&--5 {
+		  width: span(5);
+		}
+
+		&--6 {
+		  width: span(2);
+		}
+
+		&--7,
+		&--8,
+		&--9,
+		&--10 {
+		  width: span(3);
+		}
+
+	}
+
+
+
+
+}

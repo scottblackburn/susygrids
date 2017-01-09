@@ -4,7 +4,7 @@
 
 
 
-$susy: (
+$gallery: (
   columns: 12,
   gutters: 1/4,
   container: 1024px
@@ -15,6 +15,7 @@ $susy: (
 }
 
 .l-gallery {
+	@include layout($gallery);
 	&__item {
 	  @include gallery(6 of 12);
 	  height: 30vh;
