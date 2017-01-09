@@ -1,0 +1,21 @@
+.m-logo {
+	@include font-montserrat(500);
+	text-transform: uppercase;
+	@include rem(font-size,10px);
+	letter-spacing:2px;
+
+	i {
+		@include rem(margin-right, 5px);
+		color: $c-red;
+	}
+
+	a {
+		line-height: 30px;
+	}
+
+	img {
+		max-width: 300px;
+		max-height: 30px;
+		display: block;
+	}
+}

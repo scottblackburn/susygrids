@@ -1,0 +1,342 @@
+
+/*FONTS *
+-----------------------------------------------*/
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: $c-body-color;
+
+}
+
+p {
+  @include font-freight(400);
+  @include rem(font-size, 20px);
+  color: $c-body-color;
+
+  &.small {
+    @include rem(font-size, 14px);
+  }
+
+  &.caps {
+    text-transform: uppercase;
+  }
+}
+
+
+em {
+    font-style: italic;
+}
+
+
+// Headings
+// --------
+h1, h2, h3, h4, h5 {
+    font-weight: 100;
+    margin: 10px 0px 0px 0px;
+    margin: 0;
+}
+
+//fallbacks for browsers that don't support rems
+h1 { font-size: 50px; }
+h2 { font-size: 44px; } // 2.2rem; }
+h3 { font-size: 40px; }
+h4 { font-size: 36px; }
+h5 { font-size: 32px; }
+
+h1 { font-size: 5rem; }
+h2 { font-size: 4.4rem; } // 2.2rem; }
+h3 { font-size: 3.8rem; }
+h4 { font-size: 3.6rem; }
+h5 { font-size: 3.2rem; }
+
+// Small headings used in various places, override and always set to 16px / 1rem
+h1, h2, h3, h4, h5, h6 {
+  &.small {
+    @include font-montserrat(700);
+    line-height: 1;
+    @include rem(font-size, 14px);
+    text-transform: uppercase;
+    color: $c-white;
+  }
+}
+
+
+// Margins
+h2 {
+  @include rem(margin-top, 10px);
+  @include rem(margin-bottom, 30px);
+  line-height: 1.1;
+
+  &.push-vert {
+    @include rem(margin-top, 100px);
+    @include rem(margin-bottom, 60px);
+  }
+}
+
+  h5 {
+    @include font-lato(700);
+    @include rem(font-size, 12px);
+    @include rem(margin-bottom, 15px);
+    @include rem(margin-bottom, 15px);
+    color: $c-body-color;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+// Paragraph
+// ---------
+p {
+    //margin: 20px 0px;
+    font-size: 16px;
+    @include rem(font-size, 16px);
+
+     @include mq('small-medium') {
+        @include rem(font-size, 20px);
+     }
+
+     &.quote {
+      @include rem(margin-top, 60px);
+      color: $c-red;
+
+      span.credit {
+        @include rem(margin-top, 12px);
+        display: block;
+        color: $c-body-color;
+      }
+     }
+}
+
+p + p {
+  @include rem(margin-top, 40px);
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: $c-grey-dark;
+
+    &:hover {
+        //text-decoration: underline;
+        //color: $c-red;
+    }
+}
+
+hr {
+  max-width: 140rem;
+  margin: 0 auto;
+  border: 0;
+  height: 1px;
+  background: #a8a9a9;
+
+}
+
+.intro-block {
+
+  h1 {
+      @include rem(font-size, 35px);
+
+      @include mq("medium-large") {
+        @include rem(font-size, 50px);
+      }
+  }
+
+  p {
+    @include rem(font-size, 18px);
+
+  }
+
+  @include mq("medium-large") {
+    p {
+      @include rem(font-size, 24px);
+    }
+  }
+}
+
+//Scaling settings
+
+// .u-scale {
+//  @include scaleFont(80.5rem, 3.92857143rem, 2.85714286rem, 4.5rem);
+// }
+
+//Decoration
+
+.overline {
+  position: relative;
+  &:before {
+    content: '';
+    width: 28px;
+    height: 5px;
+    display: block;
+
+    position: absolute;
+    top: -15px;
+    background: $c-red;
+
+  }
+}
+
+.underline {
+  position: relative;
+  &:after {
+    content: '';
+    width: 40px;
+    height: 3px;
+    display: block;
+    margin: 20px 0 0;
+    background: $c-red;
+
+  }
+}
+
+.standard {
+  h2:first-of-type {
+    @include font-montserrat(400);
+    @include rem(font-size, 30px);
+    color: $c-body-color;
+    text-align: center;
+    text-transform: uppercase;
+
+      &:after {
+
+      }
+  }
+
+  > p {
+
+  }
+}
+
+.t-sub-title {
+  @include font-lato(700);
+  @include rem(font-size, 11px);
+  color: $c-red;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+
+  time {
+    font-weight: 400;
+    display: block;
+    @include rem(font-size, 10px);
+
+    span {
+      font-style: italic;
+      font-weight: 700;
+      @include font-playfair(700);
+      text-transform: none;
+    }
+  }
+}
+
+.t-title {
+  @include font-trump(500);
+  @include rem(margin-top, 10px);
+  @include rem(font-size, 50px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  //font-style: italic;
+}
+
+.t-section-heading {
+  @include rem(margin-bottom, 40px);
+}
+
+.l-container {
+  h3 {
+  @include font-lato(700);
+  @include rem(font-size, 11px);
+  color: $c-red;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+
+  time {
+    font-weight: 400;
+    display: block;
+    @include rem(font-size, 10px);
+
+    span {
+      font-style: italic;
+      font-weight: 700;
+      @include font-playfair(700);
+      text-transform: none;
+    }
+  }
+}
+
+h2 {
+  @include font-trump(500);
+  @include rem(margin-top, 10px);
+  @include rem(font-size, 50px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  //font-style: italic;
+}
+}
+
+.l-article {
+  h2 {
+    @include font-lato(700);
+    @include rem(font-size, 16px);
+    @include rem(margin-bottom, 20px);
+    @include rem(margin-top, 40px);
+    color: $c-body-color;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  h3 {
+    margin-top: 3rem;
+  }
+
+  pre {
+    margin-top: 2rem;
+  }
+
+  a {
+    &:hover, &:focus {
+      color: $c-red;
+    }
+  }
+
+  ul {
+    list-style: disc;
+
+    li {
+      margin-left: 2rem;
+      list-style-position: outside;
+    }
+
+
+  }
+
+}
+
+
+    pre {
+        font-family: "Courier 10 Pitch", Courier, monospace;
+        @include rem(font-size, 14px);
+        @include rem(margin, 0 0 30px 0);
+        line-height: 140%;
+        white-space: pre;
+        white-space: pre-wrap;
+        white-space: -moz-pre-wrap;
+        white-space: -o-pre-wrap;
+
+          display: block;
+        padding: 1em 1em;
+        border: 1px solid #dcdcdc;
+         background: #f5f5f5;
+    }
+
+
+
+
+

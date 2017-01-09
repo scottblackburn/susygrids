@@ -1,0 +1,246 @@
+/*--------------------------------
+
+    Layout
+
+*/
+
+// breakpoint
+
+/*
+
+use:
+
+    get the value of a particular breakpoint
+
+example:
+
+    .box {
+        width: breakpoint("phone-wide");
+    }
+
+    would generate:
+
+    .box {
+        width: 480px;
+    }
+
+*/
+
+@function breakpoint($name) {
+    @return map_get($breakpoints, $name);
+}
+
+// basic spacing units
+
+$base-spacing-unit: 2.4rem;
+$small-spacing-unit: $base-spacing-unit / 1.2;
+
+
+// grid
+
+$grid-column-count: 24;
+$grid-column-gutter: 2.4rem;
+
+
+// media queries and breakpoints
+// build mobile first 300+
+
+$breakpoints: (
+    "small":        400px,
+    "small-medium":   480px,
+    "phablet":      560px,
+    "tablet-small": 640px,
+    "medium":       768px,
+    "tablet-wide":  1024px,
+    "large":      1248px,
+    "huge": 1440px
+);
+
+$max-width: breakpoint("large");
+
+
+/*--------------------------------
+
+    Colours
+
+*/
+
+// brand colours
+
+$c-brand-primary: #333;
+$c-brand-secondary: #e74c3c;
+
+
+// greyscale
+
+$c-black: #1a1a1a;
+$c-grey-dark: #444;
+$c-grey: #888;
+$c-grey-light: #fbfbfb;
+$c-grey-off-white: #F6F6F6;
+$c-white: #fff;
+$c-body-color: #3f3f3f;
+
+$c-dark-black: #222;
+$c-sand: #f2ede3;
+
+$c-green: #0a900a;
+
+// other colours
+
+$c-red: #f74e44;
+$c-green: #24b35d;
+$c-blue: #4D90FE;
+$c-dark-blue: #2d2d37;
+
+
+
+// form & message positive/negative colours
+
+$c-positive: $c-green;
+$c-negative: $c-red;
+
+
+// top level element colours
+
+$c-body-bg: $c-white;
+$c-body-colour: $c-black;
+
+
+// colour map (only use colours from the styleguide)
+// used for when looping through panel/theme styles
+
+@function c($colour, $value: "base") {
+
+    @if map-has-key($colours, $colour) {
+
+        $colour: map-get($colours, $colour);
+        $colourVal: map-get($colour, $value);
+        @return $colourVal;
+
+    } @else {
+
+        @warn "Colour name #{$colour} not found in $colours.";
+
+    }
+
+}
+
+$colours: (
+    // primary colours
+    "yellow": (
+        "base": $c-brand-primary
+    ),
+    "green": (
+        "base": $c-green
+    ),
+    "red": (
+        "base": $c-red
+    ),
+    "blue": (
+        "base": $c-blue
+    ),
+    // greyscale
+    "black": (
+        "base": $c-black
+    ),
+    "grey": (
+        "base": $c-grey
+    ),
+    "grey-dark": (
+        "base": $c-grey-dark
+    ),
+    "grey-light": (
+        "base": $c-grey-light
+    ),
+    "grey-off-white": (
+        "base": $c-grey-off-white
+    ),
+    "white": (
+        "base": $c-white
+    )
+);
+
+
+
+
+/*--------------------------------
+
+    Typography
+
+*/
+
+// font stacks
+// for embedded custom fonts, list name below as normal. To generate code see example in utlity/core.scss
+
+$sans-serif: Helvetica, Arial, sans-serif;
+$serif: Georgia, Times, serif;
+
+
+// font sizes
+
+$h-x-small: 1.2rem;
+$h-small: 1.4rem;
+$h-base: 1.6rem;
+$h-medium: 1.8rem;
+$h-large: 2.4rem;
+$h-x-large: 3.6rem;
+$h-xx-large: 4.8rem;
+
+$p-x-small: 1.2rem;
+$p-small: 1.4rem;
+$p-base: 1.6rem;
+$p-medium: 1.8rem;
+$p-large: 2.1rem;
+$p-x-large: 2.4rem;
+
+
+// line-height ratios
+
+$lh-mini: 1.1;
+$lh-small: 1.25;
+$lh-base: 1.6;
+$lh-large: 1.75;
+
+
+// default font sizes / line-height
+
+$base-font-size: $p-base;
+$base-line-height: $lh-base;
+
+
+// letter spacing
+
+$letter-spacing: (
+    base: -30
+);
+
+
+// weights
+
+$w-light: 300;
+$w-normal: 400;
+$w-semibold: 600;
+$w-bold: 700;
+$w-heavy: 800;
+
+
+
+// Colours
+
+$c-black: #000;
+$c-white: #fff;
+
+
+
+// z-indexing
+
+/*
+ordered from high to low
+suggested naming convention would be the class/ID the z-index is going on
+*/
+
+$z-indexes: (
+    "site-header",
+    "site-footer"
+);

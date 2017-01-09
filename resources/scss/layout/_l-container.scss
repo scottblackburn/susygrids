@@ -1,0 +1,114 @@
+.l-container {
+    @include push--auto;
+    @include soft--sides(24px / 1.2);
+    @include soft--sides($base-spacing-unit / 1.2);
+    position: relative;
+    max-width: $max-width;
+
+    display: block;
+
+    // .ie8 &{
+    //     width: $max-width;
+    // }
+
+    &--centre {
+        text-align: center;
+    }
+
+    &--wide {
+        max-width: 1600px;
+    }
+
+    &--medium {
+        max-width: 1300px;
+    }
+
+    &--max {
+        max-width: 1480px;
+    }
+
+    &--smallest {
+        max-width: 1000px;
+    }
+
+    &--blog {
+        max-width: 800px;
+    }
+
+    &--narrow {
+        max-width: 1150px;
+    }
+
+    &--single-col {
+        max-width: 800px;
+    }
+
+    &--1-col {
+        max-width: 500px;
+    }
+
+    &--no-collapse {
+        padding-right: 0!important;
+        padding-left: 0!important;
+    }
+
+    &--padded {
+        @include rem(padding, 20px 20px);
+
+         @include mq("medium") {
+            @include rem(padding, 60px 20px);
+         }
+    }
+
+    &--pad-top {
+        @include rem(padding-top, 95px);
+    }
+
+    &--no-collapse-right {
+        padding-right: 0!important;
+    }
+
+    @include mq("small") {
+        @include soft--sides(2%);
+    }
+
+    @include mq("small-medium") {
+        @include soft--sides(2%);
+    }
+
+    @include mq("medium") {
+        @include soft--sides(4%);
+    }
+
+    @include mq("large") {
+        @include soft--sides(2%);
+
+        .no-csstransforms3d &{
+            padding: 140px 48px;
+        }
+
+    }
+
+    @include mq("massive") {
+        @include soft--sides(0);
+    }
+
+    &--vert-pad {
+        @include soft--top($base-spacing-unit * 2);
+        @include soft--bottom($base-spacing-unit * 2);
+
+        .no-csstransforms3d &{
+            padding: 140px 48px;
+        }
+
+    }
+}
+
+ .no-csstransforms3d {
+
+    .site-content__inner{
+        section {
+            width: 100%;
+        }
+    }
+ }

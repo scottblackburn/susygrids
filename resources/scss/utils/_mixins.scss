@@ -1,0 +1,413 @@
+/*--------------------------------
+
+    Media Queries
+
+    used for outputting content either between media query tags, or without (for fixed-width.scss)
+
+    example: basic usage
+
+    .element {
+        width: 50%;
+
+        @include mq("tablet-small") {
+            width: 20%;
+        }
+    }
+
+    example: using max-width
+
+    .element {
+        width: 50%;
+
+        @include mq("tablet-small", "max") {
+            width: 20%;
+        }
+    }
+
+*/
+
+$fixed-width:       false !default;
+$fixed-width-limit: 980px !default;
+
+@mixin mq($width, $type: min) {
+
+    @if map_has_key($breakpoints, $width) {
+        $width: map_get($breakpoints, $width);
+
+        @if $type == max {
+            $width: $width - 1px;
+        }
+    }
+
+    @if $fixed-width {
+
+        @if $width <= $fixed-width-limit {
+            @content;
+        }
+
+    } @else {
+
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+
+    }
+
+}
+
+/*------------------------------
+
+    Bem Selectors
+
+*/
+
+$elementSeparator: ‘__’;
+$modifierSeparator: ‘--’;
+
+@mixin b($block) {
+   .#{$block} {
+       @content;
+   }
+}
+@mixin e($element) {
+    @at-root {
+        #{&}#{$elementSeparator+$element} {
+            @content;
+        }
+    }
+}
+@mixin m($modifier) {
+    @at-root {
+        #{&}#{$modifierSeparator+$modifier} {
+            @content;
+        }
+    }
+}
+
+@mixin e($element) {
+    $selector: &;
+    $block: getBlock($selector);
+    @if containsModifier($selector) {
+        @at-root {
+            #{$selector} {
+                #{$block+$elementSeparator+$element} {
+                    @content;
+                }
+            }
+       }
+    }
+    @else {
+        @at-root {
+            #{$selector+$elementSeparator+$element} {
+                @content;
+            }
+        }
+    }
+}
+
+
+/*--------------------------------
+
+    Responsive ratio
+
+    Used for creating scalable elements that maintain the same ratio
+
+    example:
+    .element {
+        @include responsive-ratio(400, 300);
+    }
+
+*/
+
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}
+
+/*--------------------------------
+
+    Typography
+
+    Text image replacement, with responsive ratio
+
+    HTML:
+
+    <h1 class="element">
+        <span>Text to replace</span>
+    </h1>
+
+    example:
+    .element {
+        @include typography(200, 50, 'hello-world');
+    }
+
+
+*/
+
+@mixin typography($w, $h, $file, $type: png, $overflow: hidden) {
+    @include responsive-ratio($w, $h, true);
+    position: relative;
+    max-width: ( $w / 10 ) * 1rem;
+    background: url('/assets/img/typography/#{$file}.#{$type}') 50% 50% no-repeat;
+    background-size: contain;
+
+    span {
+        @include hide-text(true, $overflow: $overflow);
+    }
+}
+
+
+
+/*--------------------------------
+
+    CSS Triangle
+
+    used for creating CSS only triangles
+
+    example:
+    .element {
+
+        &:before {
+            @include css-triangle(blue, down);
+        }
+    }
+
+*/
+
+@mixin transform($val) {
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  transform: $val;
+}
+
+@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false){
+    @include pseudo($pos: $position);
+    width: 0;
+    height: 0;
+
+    @if $round {
+        border-radius: 3px;
+    }
+
+    @if $direction == down {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-top: $size solid $color;
+        margin-top: 0 - round( $size / 2.5 );
+    } @else if $direction == up {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-bottom: $size solid $color;
+        margin-bottom: 0 - round( $size / 2.5 );
+    } @else if $direction == right {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size solid $color;
+        margin-right: -$size;
+    } @else if  $direction == left {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-right: $size solid $color;
+        margin-left: -$size;
+    }
+}
+
+
+
+
+/*--------------------------------
+
+    Helper mixins
+
+*/
+
+// Contain floats / clearfix
+
+@mixin cf {
+
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+//center
+
+@mixin center($horizontal: true, $vertical: true) {
+  position: absolute;
+  @if ($horizontal and $vertical) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if ($horizontal) {
+    left: 50%;
+    transform: translate(-50%, 0);
+  } @else if ($vertical) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
+
+// Image replacement
+
+@mixin ir {
+    display: block;
+    background: {
+        repeat: no-repeat;
+        position: 0 0;
+    }
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+
+// Hide from both screenreaders and browsers
+
+@mixin hidden {
+    display: none;
+    visibility: hidden;
+}
+
+@mixin visible($state: 'block') {
+    display: unquote($state);
+    visibility: visible;
+}
+
+
+// Hide only visually, but have it available for screenreaders
+
+@mixin vh($focusable: false) {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+
+    @if $focusable {
+        @include vh-focusable;
+    }
+}
+
+@mixin vh-reset {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+
+// Allow the element to be focusable when navigated to via the keyboard
+
+@mixin vh-focusable {
+
+    &:active,
+    &:focus {
+        clip: auto;
+        height: auto;
+        margin: 0;
+        overflow: visible;
+        position: static;
+        width: auto;
+    }
+}
+
+
+// Hide visually and from screenreaders, but maintain layout
+
+@mixin invisible {
+    visibility: hidden;
+}
+
+
+
+/*--------------------------------
+
+    Misc
+
+*/
+
+@mixin antialias {
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin hardware($backface: true, $perspective: 1000) {
+
+    @if $backface {
+        backface-visibility: hidden;
+    }
+
+    perspective: $perspective;
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: ''){
+    content: $content;
+    display: $display;
+    position: $pos;
+}
+
+@mixin selection {
+    ::-moz-selection { @content; }
+    ::selection { @content; }
+    ::-webkit-selection { @content; }
+
+
+}
+
+// add/remove margins
+
+@mixin push($spacing: $base-spacing-unit) { margin: $spacing; }
+@mixin push--top($spacing: $base-spacing-unit) { margin-top: $spacing; }
+@mixin push--bottom($spacing: $base-spacing-unit) { margin-bottom: $spacing; }
+@mixin push--left($spacing: $base-spacing-unit) { margin-left: $spacing; }
+@mixin push--right($spacing: $base-spacing-unit) { margin-right: $spacing; }
+@mixin push--ends($spacing: $base-spacing-unit) { margin: { top: $spacing; bottom: $spacing; } }
+@mixin push--sides($spacing: $base-spacing-unit) { margin: { left: $spacing; right: $spacing; } }
+
+@mixin push--auto { margin: { left: auto; right: auto; } }
+@mixin offset--sides($spacing: $base-spacing-unit) { margin: { left: -$spacing; right: -$spacing; } }
+
+@mixin flush { margin: 0; }
+@mixin flush--top { margin-top: 0; }
+@mixin flush--bottom { margin-bottom: 0; }
+@mixin flush--left { margin-left: 0; }
+@mixin flush--right { margin-right: 0; }
+@mixin flush--ends { margin: { top: 0; bottom: 0; } }
+@mixin flush--sides { margin: { left: 0; right: 0; } }
+
+
+// add/remove paddings
+
+@mixin soft($spacing: $base-spacing-unit) { padding: $spacing; }
+@mixin soft--top($spacing: $base-spacing-unit) { padding-top: $spacing; }
+@mixin soft--bottom($spacing: $base-spacing-unit) { padding-bottom: $spacing; }
+@mixin soft--left($spacing: $base-spacing-unit) { padding-left: $spacing; }
+@mixin soft--right($spacing: $base-spacing-unit) { padding-right: $spacing; }
+@mixin soft--ends($spacing: $base-spacing-unit) { padding: { top: $spacing; bottom: $spacing; } }
+@mixin soft--sides($spacing: $base-spacing-unit) { padding: { left: $spacing; right: $spacing; } }
+
+@mixin hard { padding: 0; }
+@mixin hard--top { padding-top: 0; }
+@mixin hard--bottom { padding-bottom: 0; }
+@mixin hard--left { padding-left: 0; }
+@mixin hard--right { padding-right: 0; }
+@mixin hard--ends { padding: { top: 0; bottom: 0; } }
+@mixin hard--sides { padding: { left: 0; right: 0; } }

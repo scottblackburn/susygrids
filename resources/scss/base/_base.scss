@@ -1,0 +1,64 @@
+/*--------------------------------
+
+    Box sizing
+
+*/
+
+* {
+
+    &,
+    &:before,
+    &:after {
+        box-sizing: border-box;
+    }
+}
+
+
+
+/*--------------------------------
+
+    Basic document styling
+
+*/
+
+html {
+    @include rem-baseline;
+    min-height: 100%;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: none;
+    @include antialias;
+
+
+
+    @include mq("phone-wide", "max") {
+        font-size: 9px;
+    }
+}
+
+body {
+    background-color: #fff;
+    color: $c-black;
+    @include font-freight(400);
+    @include rem(font-size, 20px); // Simple
+    line-height: $base-line-height;
+
+    //@include container(80rem);
+    padding-top: 50px;
+
+    @include mq("medium") {
+        padding-top: 70px;
+    }
+}
+
+
+/*--------------------------------
+
+    Text selection/highlighting
+
+*/
+
+@include selection {
+    background: #fdf7c3;
+    color: $c-black;
+    text-shadow: none;
+}

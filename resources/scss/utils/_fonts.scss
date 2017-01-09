@@ -1,0 +1,158 @@
+@mixin font-face($name, $filename, $svgfontid, $weight: normal, $style: normal) {
+    @font-face {
+        font-family: $name;
+        src: url('../fonts/#{$filename}.eot');
+        src: url('../fonts/#{$filename}.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/#{$filename}.woff') format('woff'),
+             url('../fonts/#{$filename}.ttf') format('truetype'),
+             url('../fonts/#{$filename}.svg##{$svgfontid}') format('svg');
+        font-style: $style;
+        font-weight: $weight;
+    }
+    @media screen and (-webkit-min-device-pixel-ratio: 0){
+        @font-face {
+            font-family: $name;
+            src: url('../fonts/#{$filename}.svg##{$svgfontid}') format('svg');
+        }
+    }
+}
+
+@include font-face('Bariol Bold', 'bariol_bold-webfont', 'bariol_boldbold');
+@include font-face('Bariol Light', 'bariol_light-webfont', 'bariol_lightlight');
+@include font-face('Bariol Regular', 'bariol_regular-webfont', 'bariol_regularregular');
+//@include font-face('Bariol Serif', 'bariol_serif_regular-webfont', 'bariol_boldbold');
+
+/*--------------------------------
+
+    Font families
+
+*/
+
+
+@mixin font-freight($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: "freight-text-pro", Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-tisa($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: "ff-tisa-web-pro", Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-bebas($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'bebas-neue', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-lato($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'Lato', serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+
+
+@mixin font-trump($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'trumpgothicpro', serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-alternate($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'alternate-gothic-no-3-d', serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-korolev($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'korolev-compressed', serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-playfair($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'Playfair Display', serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-montserrat($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'Montserrat', sans-serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-brandon($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'brandon-grotesque', sans-serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-effra($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'effra', sans-serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-merriweather($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'font-family: 'Merriweather', serif;', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-bariol-light($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'Bariol Light', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}
+
+@mixin font-bariol-regular($weight: false, $size: false, $lh: false, $colour: false) {
+    font-family: 'Bariol Regular', Arial, sans-serif;
+
+    @if $weight { font-weight: $weight; }
+    @if $size { font-size: $size; }
+    @if $lh { line-height: $lh; }
+    @if $colour { color: $colour; }
+}

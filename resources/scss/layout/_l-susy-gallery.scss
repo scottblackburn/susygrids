@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+
+
+$susy: (
+  columns: 12,
+  gutters: 1/4,
+  container: 1024px
+);
+
+.l-container {
+  @include container();
+}
+
+.l-gallery {
+	&__item {
+	  @include gallery(6 of 12);
+	  height: 30vh;
+	  margin-top: gutter(12);
+	  background: #f74e44;
+
+	  @media (min-width: 410px) {
+	    @include gallery(6 of 12);
+	  }
+
+	  @media (min-width: 600px) {
+	    @include gallery(2 of 12);
+	  }
+	}
+}
+
